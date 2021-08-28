@@ -27,7 +27,7 @@ const recentTopics = (topic, Icon, active) => (
 
 function LeftSidebar({ session }) {
   return (
-    <div className="hidden md:inline md:flex-[0.4] rounded-xl text-center h-full sticky">
+    <div className="hidden md:inline md:flex-[0.4] rounded-xl text-center h-screen sticky">
       <div className="flex flex-col items-center border border-gray-300 border-b-0 bg-white pb-3 rounded-md">
         <img
           src="/github.png"

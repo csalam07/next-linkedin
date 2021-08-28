@@ -17,7 +17,7 @@ const newsArticle = (heading, subtitle) => (
 
 function RightSidebar({ session }) {
   return (
-    <div className="hidden flex-grow-0 lg:inline lg:flex-[0.4] sticky h-screen mt-[5%] space-y-2">
+    <div className="hidden flex-grow-0 lg:inline lg:flex-[0.4] sticky h-screen space-y-2">
       <div className="bg-white border border-gray-300 pb-3 rounded-md">
         <div className="flex items-center justify-between border-b-0 p-3">
           <h2 className="text-sm font-semibold">LinkedIn News</h2>

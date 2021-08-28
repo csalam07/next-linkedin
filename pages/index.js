@@ -8,7 +8,7 @@ function Home({ session }) {
   if (!session) return <Login />;
 
   return (
-    <section className="flex flex-1 items-center mx-2">
+    <section className="flex flex-1 items-center mx-2 md:mt-10">
       <LeftSidebar session={session} />
       <Feed session={session} />
       <RightSidebar session={session} />

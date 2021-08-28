@@ -19,7 +19,9 @@ function Header() {
   };
   return (
     <header
-      className={`${!session ? "hidden" : "bg-white shadow-sm z-50 sticky"} `}
+      className={`${
+        !session ? "hidden" : "bg-white shadow-sm z-50 !sticky top-0"
+      } `}
     >
       <div className="flex items-center justify-between w-full lg:max-w-7xl mx-auto">
         <div className="flex space-x-6 p-2 mx-1 lg:mx-0 w-full">
@@ -27,12 +29,12 @@ function Header() {
             className="h-10 w-10 text-linkedin-blue"
             onClick={() => navigateUser("/")}
           />
-          <form className="flex flex-1 bg-[#eef3f8] max-w-sm items-center space-x-2 p-2 rounded-md">
+          <form className="flex flex-1 bg-[#eef3f8] shadow-sm focus-within:shadow-md max-w-sm items-center space-x-2 p-2 rounded-md">
             <GrFormSearch className="h-6 w-6" />
             <input
               type="text"
               placeholder="Search"
-              className="bg-transparent outline-none"
+              className="bg-transparent outline-none group w-full"
             />
             <button
               type="submit"
@@ -59,14 +61,30 @@ function Header() {
             active={active === "/network" ? true : false}
             onClick={() => navigateUser("/network")}
           />
-          <NavItems Icon={HiBriefcase} title="Jobs" />
-          <NavItems Icon={BsFillChatDotsFill} title="Messaging" />
-          <NavItems Icon={BsFillBellFill} title="Notifications" />
+          <NavItems
+            Icon={HiBriefcase}
+            title="Jobs"
+            active={active === "/jobs" ? true : false}
+            onClick={() => navigateUser("/jobs")}
+          />
+          <NavItems
+            Icon={BsFillChatDotsFill}
+            title="Messaging"
+            active={active === "/messaging" ? true : false}
+            onClick={() => navigateUser("/messaging")}
+          />
+          <NavItems
+            Icon={BsFillBellFill}
+            title="Notifications"
+            active={active === "/notification" ? true : false}
+            onClick={() => navigateUser("/notification")}
+          />
           <NavItems
             title="me"
             avatar={true}
             onClick={signOut}
             Down={AiFillCaretDown}
+            active={active === "/work" ? true : false}
           />
           <NavItems Icon={GrApps} title="Work" Down={AiFillCaretDown} />
           <p className="hidden lg:inline-flex hover:underline w-full text-center">

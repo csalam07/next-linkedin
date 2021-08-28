@@ -3,9 +3,9 @@ import Image from "next/image";
 function NavItems({ Icon, avatar, title, onClick, active, Down }) {
   return (
     <div
-      className={`flex flex-col w-full items-center cursor-pointer group md:hover:border-b-2 ${
-        active && "md:border-b-2"
-      } border-gray-600 md:pb-3 md:mt-2`}
+      className={`flex flex-col text-gray-500 w-full items-center cursor-pointer group md:hover:border-b-2 ${
+        active && "md:border-b-2 text-gray-800"
+      } border-gray-600 md:pb-3 md:mt-2 hover:text-gray-800`}
       onClick={onClick}
     >
       {Icon && (

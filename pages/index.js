@@ -8,10 +8,10 @@ function Home({ session }) {
   if (!session) return <Login />;
 
   return (
-    <section className="flex flex-1 items-center">
-      <LeftSidebar />
-      <Feed />
-      <RightSidebar />
+    <section className="flex flex-1 items-center mx-2">
+      <LeftSidebar session={session} />
+      <Feed session={session} />
+      <RightSidebar session={session} />
     </section>
   );
 }

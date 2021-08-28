@@ -1,4 +1,4 @@
-function Notificstion() {
+function Notification() {
   return (
     <section>
       <h1>Notifications</h1>
@@ -6,4 +6,4 @@ function Notificstion() {
   );
 }
 
-export default Notificstion;
+export default Notification;

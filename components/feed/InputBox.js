@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { BiCalendarStar } from "react-icons/bi";
+import { HiPhotograph, HiViewBoards } from "react-icons/hi";
+import { ImPlay } from "react-icons/im";
 import { useRef, useState } from "react";
+import { db, storage } from "../../firebase";
+import firebase from "firebase";
 
 function InputBox({ session }) {
   const inputRef = useRef(null);
@@ -24,6 +28,47 @@ function InputBox({ session }) {
   const sendPost = (e) => {
     e.preventDefault();
     if (!inputRef.current.value) return;
+
+    db.collection("posts")
+      .add({
+        message: inputRef.current.value,
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image,
+        verifiedUser: false,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then((doc) => {
+        if (imageToPost) {
+          const uploadTask = storage
+            .ref(`posts/${doc.id}`)
+            .putString(imageToPost, "data_url");
+
+          removeImage();
+          uploadTask.on(
+            "state_change",
+            null,
+            (error) => alert(error),
+            () => {
+              // when the uploads completed
+              storage
+                .ref("posts")
+                .child(doc.id)
+                .getDownloadURL()
+                .then((url) => {
+                  db.collection("posts").doc(doc.id).set(
+                    {
+                      postImage: url,
+                    },
+                    { merge: true },
+                  );
+                });
+            },
+          );
+        }
+      });
+
+    inputRef.current.value = "";
   };
 
   return (
@@ -63,7 +108,7 @@ function InputBox({ session }) {
           onClick={() => filePickerRef.current.click()}
           className="inputIcon"
         >
-          <BiCalendarStar className="h-7 text-blue-500" />
+          <HiPhotograph className="h-7 text-blue-500" />
           <p className="text-xs sm:text-sm xl:text-base">Photo</p>
           <input
             ref={filePickerRef}
@@ -74,7 +119,7 @@ function InputBox({ session }) {
         </div>
 
         <div className="inputIcon">
-          <BiCalendarStar className="h-7 text-green-500" />
+          <ImPlay className="h-7 text-green-500" />
           <p className="text-xs sm:text-sm xl:text-base">Video</p>
         </div>
 
@@ -83,7 +128,7 @@ function InputBox({ session }) {
           <p className="text-xs sm:text-sm xl:text-base">Event</p>
         </div>
         <div className="inputIcon">
-          <BiCalendarStar className="h-7 text-red-300" />
+          <HiViewBoards className="h-7 text-red-300" />
           <p className="text-xs sm:text-sm xl:text-base">Write article</p>
         </div>
       </div>
